@@ -116,35 +116,42 @@ export default function SocialShare() {
 
     return (
 
-        <div className="container mx-auto p-4 max-w-4xl">
+        <div className="container mx-auto px-4 py-8 max-w-4xl">
 
-            <h1 className="text-3xl font-bold mb-6 text-center">
+            <h1 className="text-4xl font-extrabold text-center mb-10 text-primary">
 
                 Social Media Image Creator
 
             </h1>
 
-            <div className="card">
+            <div className="bg-base-100 rounded-2xl shadow-xl p-6">
 
-                <div className="card-body">
+                <div className="space-y-6">
 
-                    <h2 className="card-title mb-4">Upload an Image</h2>
+                    {/* Upload Section */}
+                    <div>
 
-                    <div className="form-control">
+                        <h2 className="text-2xl font-semibold mb-2">📤 Upload Image</h2>
 
-                        <label className="label">
+                        <div className="form-control">
 
-                            <span className="label-text">Choose an image file</span>
+                            <label className="label">
 
-                        </label>
+                                <span className="label-text text-base font-medium">Choose an image file</span>
 
-                        <input
-                            type="file"
-                            onChange={handleFileUpload}
-                            className="file-input file-input-bordered file-input-primary w-full"
-                        />
+                            </label>
+
+                            <input
+                                type="file"
+                                onChange={handleFileUpload}
+                                className="file-input file-input-bordered file-input-primary w-full"
+                            />
+
+                        </div>
 
                     </div>
+
+                    {/* Uploading Indicator */}
 
                     {isUploading && (
 
@@ -156,20 +163,20 @@ export default function SocialShare() {
 
                     )}
 
+                    {/* Format Selection & Preview */}
+
                     {uploadedImage && (
 
-                        <div className="mt-6">
+                        <div className="space-y-6">
 
-                            <h2 className="card-title mb-4">Select Social Media Format</h2>
+                            <div>
 
-                            <div className="form-control">
+                                <h2 className="text-2xl font-semibold mb-2">📱 Select Format</h2>
 
                                 <select
                                     className="select select-bordered w-full"
                                     value={selectedFormat}
-                                    onChange={(e) =>
-                                        setSelectedFormat(e.target.value as SocialFormat)
-                                    }
+                                    onChange={(e) => setSelectedFormat(e.target.value as SocialFormat)}
                                 >
 
                                     {Object.keys(socialFormats).map((format) => (
@@ -179,23 +186,29 @@ export default function SocialShare() {
                                             {format}
 
                                         </option>
-
                                     ))}
 
                                 </select>
 
                             </div>
 
-                            <div className="mt-6 relative">
+                            {/* Image Preview */}
 
-                                <h3 className="text-lg font-semibold mb-2">Preview:</h3>
+                            <div className="bg-base-200 p-4 rounded-xl relative shadow-inner">
 
-                                <div className="flex justify-center">
+                                <h3 className="text-lg font-semibold mb-3">🖼️ Preview</h3>
+
+                                <div className="flex justify-center items-center overflow-hidden min-h-[200px]">
 
                                     {isTransforming && (
-                                        <div className="absolute inset-0 flex items-center justify-center bg-base-100 bg-opacity-50 z-10">
-                                            <span className="loading loading-spinner loading-lg"></span>
+
+                                        <div className="absolute inset-0 flex items-center justify-center 
+                                        bg-base-100 bg-opacity-70 z-10 rounded-xl">
+
+                                            <span className="loading loading-bars loading-lg text-primary"></span>
+
                                         </div>
+
                                     )}
 
                                     <CldImage
@@ -206,20 +219,22 @@ export default function SocialShare() {
                                         alt="transformed image"
                                         crop="fill"
                                         aspectRatio={socialFormats[selectedFormat].aspectRatio}
-                                        gravity='auto'
+                                        gravity="auto"
                                         ref={imageRef}
                                         onLoad={() => setIsTransforming(false)}
+                                        className="rounded-lg"
                                     />
 
                                 </div>
 
                             </div>
 
-                            <div className="card-actions justify-end mt-6">
+                            {/* Download Button */}
+                            <div className="flex justify-end">
 
-                                <button className="btn btn-primary" onClick={handleDownload}>
+                                <button className="btn btn-primary btn-wide" onClick={handleDownload}>
 
-                                    Download for {selectedFormat}
+                                    ⬇️ Download for {selectedFormat}
 
                                 </button>
 
