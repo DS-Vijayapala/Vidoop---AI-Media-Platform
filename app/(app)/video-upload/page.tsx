@@ -1,9 +1,8 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react'
-import axios from 'axios'
-import { useRouter } from 'next/navigation'
-
+import { use, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 function VideoUpload() {
 
@@ -15,7 +14,7 @@ function VideoUpload() {
 
     const router = useRouter();
 
-    const MAX_FILE_SIZE = 70 * 1024 * 1024; // 70MB Maximum file size
+    const MAX_FILE_SIZE = 70 * 1024 * 1024; // 70MB
 
     const handleSubmit = async (e: React.FormEvent) => {
 
@@ -37,10 +36,12 @@ function VideoUpload() {
         const formData = new FormData();
 
         formData.append("file", file);
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("originalSize", file.size.toString());
 
+        formData.append("title", title);
+
+        formData.append("description", description);
+
+        formData.append("originalSize", file.size.toString());
 
         try {
 
@@ -57,7 +58,6 @@ function VideoUpload() {
         } finally {
 
             setIsUploading(false);
-
         }
 
     };
@@ -69,7 +69,9 @@ function VideoUpload() {
             <div className="bg-base-100 shadow-xl rounded-2xl p-6">
 
                 <h1 className="text-3xl font-bold mb-6 text-center text-primary">
+
                     🎬 Upload a Video
+
                 </h1>
 
                 {error && (
@@ -143,7 +145,9 @@ function VideoUpload() {
                         />
 
                         <span className="text-xs text-gray-500 mt-1">
+
                             Max file size: 70MB
+
                         </span>
 
                     </div>
@@ -151,6 +155,7 @@ function VideoUpload() {
                     {/* Upload Button */}
 
                     <button
+
                         type="submit"
                         className={`btn btn-primary w-full ${isUploading ? "btn-disabled" : ""}`}
                         disabled={isUploading}
@@ -158,16 +163,15 @@ function VideoUpload() {
 
                         {isUploading ? (
 
-                            <div>
-
+                            <>
                                 <span className="loading loading-spinner loading-sm mr-2"></span>
-
                                 Uploading...
-
-                            </div>
+                            </>
 
                         ) : (
+
                             "Upload Video"
+
                         )}
 
                     </button>
@@ -181,5 +185,6 @@ function VideoUpload() {
     );
 
 }
+
 
 export default VideoUpload;
