@@ -1,5 +1,17 @@
 import { SignIn } from '@clerk/nextjs'
 
-export default function Page() {
-    return <SignIn />
+import React from 'react'
+
+function page() {
+
+    return (
+
+        <div className='flex flex-col items-center justify-center h-screen bg-gray-700'>
+            <SignIn />
+        </div>
+
+    )
+
 }
+
+export default page

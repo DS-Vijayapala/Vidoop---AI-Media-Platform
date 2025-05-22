@@ -108,7 +108,8 @@ export default function AppLayout({
                                             <img
                                                 src={user.imageUrl}
                                                 alt={
-                                                    user.username || user.emailAddresses[0].emailAddress
+                                                    user.username ||
+                                                    user.emailAddresses[0].emailAddress
                                                 }
                                             />
 
@@ -118,7 +119,7 @@ export default function AppLayout({
 
                                     <span className="text-sm truncate max-w-xs lg:max-w-md">
 
-                                        {user.username || user.emailAddresses[0].emailAddress}
+                                        {user.username}
 
                                     </span>
 

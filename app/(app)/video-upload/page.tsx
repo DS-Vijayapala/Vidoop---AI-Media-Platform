@@ -11,6 +11,7 @@ function VideoUpload() {
     const [description, setDescription] = useState("");
     const [isUploading, setIsUploading] = useState(false);
     const [error, setError] = useState(""); // For file size errors
+    const [uploadProgress, setUploadProgress] = useState(0);
 
     const router = useRouter();
 
@@ -45,7 +46,17 @@ function VideoUpload() {
 
         try {
 
-            await axios.post("/api/video-upload", formData);
+            await axios.post("/api/video-upload", formData, {
+
+                onUploadProgress: (progressEvent) => {
+
+                    const percentCompleted = Math.round((progressEvent.loaded * 100) / (progressEvent.total || 1));
+
+                    setUploadProgress(percentCompleted);
+
+                },
+
+            });
 
             router.push("/");
 
@@ -61,6 +72,8 @@ function VideoUpload() {
         }
 
     };
+
+
 
     return (
 
@@ -175,6 +188,16 @@ function VideoUpload() {
                         )}
 
                     </button>
+
+                    {isUploading && (
+
+                        <progress
+                            className="progress progress-primary w-full mt-2"
+                            value={uploadProgress}
+                            max="100"
+                        ></progress>
+
+                    )}
 
                 </form>
 
